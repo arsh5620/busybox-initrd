@@ -1,0 +1,20 @@
+#!/bin/sh
+mount -t proc none /proc
+mount -t sysfs none /sys
+
+echo "=========================="
+echo "***Kernel boot finished***"
+echo "=========================="
+echo 
+echo "Starting userspace"
+echo 
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
+
+# Executing /bin/sh from init hands over the execution to the minimal busybox shell
+# You can replace the /bin/sh with any program, for example `exec /userspace` should give you 
+# the message `Hello from userspace!` and then enter an infinte sleep loop to keep the kernel online
+
+# Once the init process exits the kernel will panic
+exec /bin/sh
+
+# exec /userspace
